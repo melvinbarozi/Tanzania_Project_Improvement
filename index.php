@@ -6,14 +6,14 @@
     <title>Student Dashboard</title>
     <!-- Link Bootstrap CSS file -->
     <link rel="stylesheet" href="../Assets/bootstrap/css/bootstrap.min.css">
-    <!-- Link Font Awesome CSS file -->
+    
     <link rel="stylesheet" href="../Assets/fontawesome/css/all.min.css">
     <style>
         /* Custom CSS styles can be added here */
     </style>
 </head>
 <body>
-    <!-- Header section with different colors -->
+    
     <header class="container-fluid bg-primary text-white py-3">
         <div class="row">
             <div class="col">
