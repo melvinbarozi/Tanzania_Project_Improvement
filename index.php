@@ -1,155 +1,167 @@
+<!DOCTYPE html>
 
 <?php
-  
-      require_once('server/connection.php');
+ require_once('../server/connection.php');
     
- ?>
-</html>
-<!DOCTYPE html>
+//  if(!empty($_SESSION['hod'])){
+//      header('location:../');
+
+// Check if data is received through POST request
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resource Management and Inter-Department Sharing</title>
     <!-- Link Bootstrap CSS file -->
-    <link rel="stylesheet" href="Assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Assets/w3/w3.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="Assets/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="Assets/bootstrap/css/css.css">
-    
+    <link rel="stylesheet" href="../Assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Assets/w3/w3.css">
+    <link rel="stylesheet" href="../Assets/fontawesome/webfonts">
+    <link rel="stylesheet" href="../Assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Assets/bootstrap/css/css.css">
+    <link rel="stylesheet" href="../Assets/fontawesome/css/all.min.css">
+
 </head>
-
 <body>
-    <!-- Your HTML content goes here -->
-    
-    <!-- Link Bootstrap JS file (jQuery is required for Bootstrap JS components) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="Assets/bootstrap/bootstrap.min.js"></script>
-    <script src="Assets/bootstrap/w3/w3.js"></script>
-    <script>
-      function validateForm() {
-    var id = $("#id").val();
-    var password = $("#password").val();
-    var loginAs = $("#loginAs").val();
-    var isValid = true;
-
-    if (id == "" || password == "" || loginAs == "") {
-        isValid = false;
-        $("input").each(function(){
-            if ($(this).val() == "") {
-                $(this).css("border", "2px solid red");
-            }
-        });
-    
-        $("#warningPopup").modal("show");
-    }
-
-    return isValid;
-}
-
-$(document).ready(function(){
-                $("#login").click(function(){
-                    var id = $("#id").val();
-                     var password = $("#password").val();
-                    var loginAs = $("#loginAs").val();
-
-
-                    if(id === '' || id === null ){
-                        $('#id').css("border", "4px solid red ").focus();
-                        $('#dvError').text('Please Enter Email Id');
-                        return false;
-                    }   
-                    if(password === '' || password === null){
-                        $('#password').css("border", "4px solid red ").focus();
-                        $('#dvError').text('Please Enter Your Password');
-                        return false;
-                    }
-                    if(loginAs === '' || loginAs === null){
-                        $('#loginAs').css("border", "4px solid red ").focus();
-                        $('#dvError').text('Please Select Your Login Roles');
-                        return false;
-                    }
-                });
-            });
-</script>
+    <!-- Header section with different colors -->
     <header class="container-fluid bg-primary text-white py-3">
         <div class="row">
             <div class="col">
                 <h3>Tanzania Resource Portoal</h3>
             </div>
+            <div class="col text-end">
+            <a href="#" class="text-white text-decoration-none" title="Welcome [Login User]">
+    <span class="badge bg-primary">WELCOME @Santana Barr3ra</span>
+</a>
+<a href="#" class="text-white mx-3 text-decoration-none" title="Change Password">
+    <span class="badge bg-primary">CHANGE PASSWORD</span>
+</a>
+<a href="#" class="text-white text-decoration-none" title="Logout">
+    <span class="badge bg-primary">LOGUT</span>
+</a>
+
+</div>
+
         </div>
     </header>
 
+    <!-- Section to indicate the path -->
+    <div class="container my-3">
+        <p>Path: AMREF / CTC / DQA Files</p>
+    </div>
+
+    <!-- Main content -->
     <div class="container">
-  
-    <div class="row justify-content-center">
-    
-     
+        <div class="row">
+            <!-- Left navigation section -->
+            <div class="col-md-3">
+                <button class="btn btn-primary mb-3">My Uploads</button>
+                <button class="btn btn-primary mb-3">All Files</button>
+                <button class="btn btn-success mb-3">Request Resources</button>
 
-        <div class="col-md-6">
-        <h2 class="college-heading fw-bold">
-        <img src="Assets/images/logo.png" alt="College Logo" class="college-logo">
-        ARUSHA TECHNICAL COLLEGE
-        
-    </h2>
-            <div class="w3-card-4 p-4 login-form">
-                <h2 class="text-center mb-4">Resource Management and Inter-Department Sharing</h2>
-                <form method="POST" action="" id="insertForm">
+            </div>
+            <!-- Middle content section -->
+            <div class="col-md-6">
+                <h4 class="mb-3">Guides</h4>
+                <p>
+    Please make sure the file has the following specifications:
+    <ul>
+        <li>An extension of "xlsx"</li>
+        <li>All resources information must be in sheet named</li>
+        <li>No column should be renamed from the original</li>
+    </ul>
+</p>
 
-    <div class="mb-3">
-        <label for="loginAs" class="form-label">Login As</label>
-        <select class="w3-select" id="loginAs" name="loginas">
-            <option value="internal-Auditor">Internal-Auditor</option>
-            <option value="student">Student</option>
-            <option value="Store Keeper">Store Keeper</option>
-            <option value="otherStaff">Academician</option>
-        </select>
-    </div>
-    <div class="mb-3">
-        <input type="text" class="w3-input" id="id" placeholder="Enter username or Email Address" name="id">
-    </div>
-    <div class="mb-3">
-        <input type="password" class="w3-input" id="password" placeholder="Enter password" name="password">
-    </div>
-    
-    <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
-        <label class="form-check-label" for="rememberMe">Remember me</label>
-    </div>
-</form>
-
-    <div class="d-grid mb-3">
-        <a href="" class="btn btn-link">Forgot Password?</a>
-        <input  type="submit"  name="login" class="w3-button w3-green btn-block" id="login">
-        </div>
-    <script>
-        $(document).ready(function(){
-            $("#submitBtn").click(function(){
-                validateForm(); // Call the validation function on button click
-            });
-        });
-    </script>
-               
+                <!-- Form to select entities -->
+                <form metho="POST" action "">
+                    <div class="mb-3">
+                        <label for="entitySelect" class="form-label">Show:</label>
+                        <select class="form-select" id="entitySelect">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <!-- Add more options if needed -->
+                        </select>
+                    </div>
+                </form>
+                <!-- Form to search contents -->
+                
+                <!-- Button to request resources -->
+            </div>
+            <!-- Right search form section -->
+            <div class="col-md-3">
+                <h4 class="mb-3">Search</h4>
+                <form>
+                    <div class="mb-3">
+                    
+                        <input type="text" class="form-control" placeholder="Search...">
+                    
+                    </div>
+                    
+                </form>
             </div>
         </div>
     </div>
- 
-</div>
-</div>
-<footer class="footer w3-margin">
+
+    <!-- Table section -->
+    <div class="container mt-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Maark</th>
+                    <th>#</th>
+                    <th>Uploaded Files</th>
+                    <th>Status</th>
+                    <th>Uploaded By</th>
+                    <th>Uploaded At</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <?php
+            $data = mysqli_query($conn, "SELECT categories.categoryName,categories.Status,categories.No_of_resources,departments.DepartmentName FROM categories,departments WHERE categories.DepartmentID= departments.DepartmentID" );
+            if (mysqli_num_rows($data) >0) {
+                $nums =0;
+                while ($row = mysqli_fetch_assoc($data)) {
+          $nums ++;
+          ?>
+          <tr>
+          <!-- //SELECT * FROM categories.categoryName,categories.categoriyId,categories.No_of_resources -->
+          <tr>
+    <td> <input type="checkbox" class="form-check-input"> </td>
+    <td><?php echo $nums;?></td>  
+    <td><?php echo $row['categoryName']?></td>
+    <td><?php echo $row['Status']?></td>
+    <td><?php echo $row['No_of_resources']?></td>
+    <td><?php echo $row['DepartmentName']?></td>
+    <td><button class="btn btn-primary">Request</button></td>
+    <td> <button class="btn btn-info">View More</button></td>
+    <td><button class="btn btn-success">Share</button></td>
+</tr>
+<?php }
+                }else {
+  ?>
+<tr>
+    <td colspan="6">No content available</td>
+</tr>
+<?php }?>
+
+        </table>
+    </div>
+    <footer class="footer w3-margin">
         <div class="container">
             <div class="social-icons">
+                <a href="#" class="w3-hover-opacity"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="w3-hover-opacity"><i class="fab fa-twitter"></i></a>
                 <a href="#" class="w3-hover-opacity"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-instagram w3-xlarge w3-margin-right"></i></a>
-                <a href="#"><i class="fab fa-facebook w3-xlarge w3-margin-right"></i></a>
+                <a href="#" class="w3-hover-opacity"><i class="fab fa-instagram"></i></a>
             </div>
             <p>&copy; 2024 Resource Management System</p>
         </div>
     </footer>
-
-<!-- Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Link Bootstrap JS file (jQuery is required for Bootstrap JS components) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../Assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Additional JS files for your project -->
+    <!-- Add your custom JS files here if any -->
 </body>
 </html>
