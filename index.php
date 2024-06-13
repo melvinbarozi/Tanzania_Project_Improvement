@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <?php
 require_once('../server/connection.php');
-    
-//  if(!empty($_SESSION['hod'])){
-//      header('location:../');
-// Include database connection file
 if(isset($_POST['Save'])){    
 $Fullname = trim(htmlspecialchars(stripslashes(mysqli_real_escape_string($conn,$_POST["FullName"]))));
     $email = trim(htmlspecialchars(stripslashes(mysqli_real_escape_string($conn,strtolower($_POST["email"])))));
